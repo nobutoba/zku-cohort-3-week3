@@ -1,0 +1,44 @@
+powersOfTau28_hez_final_10.ptau already exists. Skipping.
+Compiling MastermindVariation.circom...
+[32mtemplate instances[0m: 82
+non-linear constraints: 477
+linear constraints: 1
+public inputs: 11
+public outputs: 1
+private inputs: 7
+private outputs: 0
+wires: 484
+labels: 2125
+[32mWritten successfully:[0m ./MastermindVariation.r1cs
+[32mWritten successfully:[0m ./MastermindVariation.sym
+[32mWritten successfully:[0m ./MastermindVariation_js/MastermindVariation.wasm
+[32mEverything went okay, circom safe[0m
+[32;22m[INFO]  [39;1msnarkJS[0m: Curve: bn-128
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Wires: 484
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Constraints: 478
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Private Inputs: 7
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Public Inputs: 11
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Labels: 2125
+[32;22m[INFO]  [39;1msnarkJS[0m: # of Outputs: 1
+[32;22m[INFO]  [39;1msnarkJS[0m: Reading r1cs
+[32;22m[INFO]  [39;1msnarkJS[0m: Reading tauG1
+[32;22m[INFO]  [39;1msnarkJS[0m: Reading tauG2
+[32;22m[INFO]  [39;1msnarkJS[0m: Reading alphatauG1
+[32;22m[INFO]  [39;1msnarkJS[0m: Reading betatauG1
+[32;22m[INFO]  [39;1msnarkJS[0m: Circuit hash: 
+		993e4873 ec5a61a8 1fc20414 1b89984d
+		04aad7d7 03e61bcb 4238f015 2287ea84
+		d73e38ac e20bfdb2 8482fd18 6288cc2f
+		4df8f96f 9fa12c55 fab636b7 803d966c
+[36;22m[DEBUG] [39;1msnarkJS[0m: Applying key: L Section: 0/471
+[36;22m[DEBUG] [39;1msnarkJS[0m: Applying key: H Section: 0/512
+[32;22m[INFO]  [39;1msnarkJS[0m: Circuit Hash: 
+		993e4873 ec5a61a8 1fc20414 1b89984d
+		04aad7d7 03e61bcb 4238f015 2287ea84
+		d73e38ac e20bfdb2 8482fd18 6288cc2f
+		4df8f96f 9fa12c55 fab636b7 803d966c
+[32;22m[INFO]  [39;1msnarkJS[0m: Contribution Hash: 
+		8b009cee df7179bb dd99b973 ec08281b
+		22515b18 57b04546 38b616c5 0eb014cc
+		f44966fe 57d92127 c5c1d5e8 8f30ad31
+		a7bc56ea 9d1e050f 84449a30 8277eab2

@@ -233,23 +233,94 @@ const genEcdhSharedKey = async ({
  * Encrypts a plaintext using a given key.
  * @return The ciphertext.
  */
+// original code copied from
+//  <https://github.com/privacy-scaling-explorations/maci/blob/3e26d930ecb8e25fef0ab3c52f0177a3a9dde0b2/crypto/ts/index.ts#L245-L265>
+//
+// const encrypt = (
+//   plaintext: Plaintext,
+//   sharedKey: EcdhSharedKey,
+// ): Ciphertext => {
+//
+//   // Generate the IV
+//   const iv = mimc7.multiHash(plaintext, BigInt(0))
+//
+//   const ciphertext: Ciphertext = {
+//       iv,
+//       data: plaintext.map((e: BigInt, i: number): BigInt => {
+//           return e + mimc7.hash(
+//               sharedKey,
+//               iv + BigInt(i),
+//           )
+//       }),
+//   }
+//
+//   // TODO: add asserts here
+//   return ciphertext
+// }
+//
 const encrypt = async (
   plaintext: Plaintext,
   sharedKey: EcdhSharedKey,
 ): Promise<Ciphertext> => {
   const mimc7 = await buildMimc7();
   // [assignment] generate the IV, use Mimc7 to hash the shared key with the IV, then encrypt the plain text
+  // generate the IV
+  const seed = BigInt(0);
+  const iv = buf2Bigint(mimc7.multiHash(plaintext, seed));
+  // use Mimc7 to hash the shared key with the IV, then encrypt the plain text
+  const ciphertext: Ciphertext = {
+    iv,
+    // plaintext[idx] == element
+    data: plaintext.map((element: bigint, idx: number): bigint => {
+      return element + buf2Bigint(mimc7.hash(
+        iv + BigInt(idx),
+        sharedKey,
+      ));
+    }),
+  }
+  return new Promise((resolve, reject) => {
+    resolve(ciphertext);
+  });
 };
 
 /*
  * Decrypts a ciphertext using a given key.
  * @return The plaintext.
  */
+// original code copied from
+// https://github.com/privacy-scaling-explorations/maci/blob/3e26d930ecb8e25fef0ab3c52f0177a3a9dde0b2/crypto/ts/index.ts#L271-L283
+//
+// const decrypt = (
+//   ciphertext: Ciphertext,
+//   sharedKey: EcdhSharedKey,
+// ): Plaintext => {
+//
+//   const plaintext: Plaintext = ciphertext.data.map(
+//       (e: BigInt, i: number): BigInt => {
+//           return BigInt(e) - BigInt(mimc7.hash(sharedKey, BigInt(ciphertext.iv) + BigInt(i)))
+//       }
+//   )
+//
+//   return plaintext
+// }
+//
 const decrypt = async (
   ciphertext: Ciphertext,
   sharedKey: EcdhSharedKey,
 ): Promise<Plaintext> => {
   // [assignment] use Mimc7 to hash the shared key with the IV, then descrypt the ciphertext
+  const mimc7 = await buildMimc7();
+  const plaintext: Plaintext = ciphertext.data.map(
+    (element: bigint, idx: number): bigint => {
+      return element - buf2Bigint(mimc7.hash(
+        ciphertext.iv + BigInt(idx),
+        sharedKey,
+      ));
+    }
+  )
+  return new Promise(function(resolve, reject) {
+    resolve(plaintext);
+  });
 };
 
 export {
